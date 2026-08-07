@@ -97,22 +97,22 @@ export default function Menu({ onSelectItem }) {
     <section
       id="menu"
       style={{
-        padding: '100px 0',
+        padding: '140px 0',
         position: 'relative',
         background: 'linear-gradient(180deg, var(--color-espresso) 0%, var(--color-obsidian) 100%)',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
         
         {/* Title */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
             INDIAN LUXURY CAFÉ MENU & TASTING FLIGHTS
           </span>
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
             Curated Menu of Indian & Global Rituals
           </h2>
-          <p className="text-lead" style={{ maxWidth: '680px', margin: '12px auto 0 auto' }}>
+          <p className="text-lead" style={{ maxWidth: '680px', margin: '16px auto 0 auto' }}>
             Every signature item is presented with its real extraction photograph, showcasing top 0.1% Araku Valley, Monsooned Malabar, and Chikmagalur micro-lots.
           </p>
         </div>
@@ -122,8 +122,8 @@ export default function Menu({ onSelectItem }) {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '8px',
-            marginBottom: '40px',
+            gap: '12px',
+            marginBottom: '60px',
             flexWrap: 'wrap',
           }}
         >
@@ -139,8 +139,8 @@ export default function Menu({ onSelectItem }) {
                 onMouseEnter={() => audioEngine.playHover()}
                 className={isActive ? 'btn-primary' : 'btn-secondary'}
                 style={{
-                  padding: '8px 16px',
-                  fontSize: '0.7rem',
+                  padding: '10px 20px',
+                  fontSize: '0.75rem',
                 }}
                 data-cursor="hover"
                 data-cursor-text="FILTER"
@@ -151,14 +151,8 @@ export default function Menu({ onSelectItem }) {
           })}
         </div>
 
-        {/* Menu Cards Grid with Mobile Stacking */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '24px',
-          }}
-        >
+        {/* Dedicated Desktop & Mobile Menu Cards Grid */}
+        <div className="menu-cards-grid" style={{ display: 'grid' }}>
           {filteredItems.map((item) => (
             <div
               key={item.id}
@@ -167,21 +161,19 @@ export default function Menu({ onSelectItem }) {
                 if (onSelectItem) onSelectItem(item);
               }}
               onMouseEnter={() => audioEngine.playHover()}
-              className="glass-panel"
+              className="glass-panel menu-card-item"
               style={{
-                borderRadius: '14px',
+                borderRadius: '16px',
                 overflow: 'hidden',
                 cursor: 'pointer',
                 transition: 'all 0.4s var(--ease-out-expo)',
-                display: 'flex',
-                flexDirection: 'column',
                 border: '1px solid var(--glass-border-light)',
               }}
               data-cursor="hover"
               data-cursor-text="VIEW"
             >
-              {/* Real Item Photo */}
-              <div style={{ position: 'relative', width: '100%', height: '200px', overflow: 'hidden', flexShrink: 0 }}>
+              {/* Real Item Photo Thumbnail */}
+              <div className="menu-card-image" style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
                 <img
                   src={item.image}
                   alt={item.name}
@@ -217,30 +209,29 @@ export default function Menu({ onSelectItem }) {
               {/* Item Text & Metadata */}
               <div
                 style={{
-                  padding: '20px',
+                  padding: '24px 28px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  flex: 1,
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px', gap: '8px' }}>
-                    <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)', fontSize: '1.15rem', lineHeight: 1.25 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px', gap: '8px' }}>
+                    <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)', fontSize: '1.25rem' }}>
                       {item.name}
                     </h3>
-                    <span style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--color-brass)', whiteSpace: 'nowrap' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--color-brass)', whiteSpace: 'nowrap' }}>
                       {item.price}
                     </span>
                   </div>
 
-                  <p className="text-body" style={{ fontSize: '0.85rem', marginBottom: '16px', lineHeight: 1.5 }}>
+                  <p className="text-body" style={{ fontSize: '0.9rem', marginBottom: '16px', lineHeight: 1.6 }}>
                     {item.description}
                   </p>
                 </div>
 
-                <div style={{ paddingTop: '10px', borderTop: '1px solid rgba(249,246,240,0.08)' }}>
-                  <span className="text-label" style={{ fontSize: '0.625rem', color: 'rgba(249,246,240,0.5)' }}>
+                <div style={{ paddingTop: '12px', borderTop: '1px solid rgba(249,246,240,0.08)' }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', color: 'rgba(249,246,240,0.5)' }}>
                     NOTES: {item.notes}
                   </span>
                 </div>

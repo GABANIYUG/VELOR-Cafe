@@ -8,30 +8,35 @@ const GALLERY_ITEMS = [
     title: 'Monolithic Travertine Bar',
     category: 'ARCHITECTURE',
     image: '/images/velor_interior_travertine.png',
+    className: 'gallery-item-1',
   },
   {
     id: 2,
     title: 'Macro Espresso Extraction',
     category: 'CRAFT',
     image: '/images/velor_espresso_macro.png',
+    className: 'gallery-item-2',
   },
   {
     id: 3,
     title: 'Hand-Poured Geisha Ritual',
     category: 'RITUAL',
     image: '/images/velor_pourover_ritual.png',
+    className: 'gallery-item-3',
   },
   {
     id: 4,
     title: 'Crystal Cold Brew Architecture',
     category: 'CRAFT',
     image: '/images/velor_coldbrew_crystal.png',
+    className: 'gallery-item-4',
   },
   {
     id: 5,
     title: 'Sanctuary Corner & Quiet Pause',
     category: 'LIFESTYLE',
     image: '/images/velor_lifestyle_sanctuary.png',
+    className: 'gallery-item-5',
   },
 ];
 
@@ -42,15 +47,15 @@ export default function Gallery() {
     <section
       id="gallery"
       style={{
-        padding: '100px 0',
+        padding: '140px 0',
         backgroundColor: 'var(--color-obsidian)',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
         
         {/* Title */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
             PART III — ARCHITECTURAL & LIFESTYLE GALLERY
           </span>
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
@@ -58,14 +63,8 @@ export default function Gallery() {
           </h2>
         </div>
 
-        {/* Responsive Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '20px',
-          }}
-        >
+        {/* Masonry Layout Grid */}
+        <div className="gallery-masonry-grid">
           {GALLERY_ITEMS.map((item) => (
             <div
               key={item.id}
@@ -74,8 +73,8 @@ export default function Gallery() {
                 setSelectedImg(item);
               }}
               onMouseEnter={() => audioEngine.playHover()}
+              className={item.className}
               style={{
-                height: '320px',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 position: 'relative',
@@ -99,15 +98,15 @@ export default function Gallery() {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(180deg, transparent 40%, rgba(18, 17, 16, 0.85) 100%)',
-                  padding: '20px',
+                  background: 'linear-gradient(180deg, transparent 50%, rgba(18, 17, 16, 0.85) 100%)',
+                  padding: '24px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'flex-end',
                 }}
               >
-                <span className="text-label" style={{ fontSize: '0.6rem', marginBottom: '2px' }}>{item.category}</span>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 400, color: 'var(--color-travertine)', fontFamily: 'var(--font-serif)' }}>
+                <span className="text-label" style={{ fontSize: '0.65rem', marginBottom: '4px' }}>{item.category}</span>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 400, color: 'var(--color-travertine)', fontFamily: 'var(--font-serif)' }}>
                   {item.title}
                 </h4>
               </div>
@@ -130,29 +129,29 @@ export default function Gallery() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '20px',
+            padding: '40px',
           }}
         >
           <button
             onClick={() => setSelectedImg(null)}
             style={{
               position: 'absolute',
-              top: '20px',
-              right: '20px',
+              top: '32px',
+              right: '32px',
               background: 'transparent',
               border: 'none',
               color: 'var(--color-travertine)',
               cursor: 'pointer',
             }}
           >
-            <X size={28} />
+            <X size={32} />
           </button>
           <img
             src={selectedImg.image}
             alt={selectedImg.title}
             style={{
-              maxWidth: '95vw',
-              maxHeight: '80vh',
+              maxWidth: '90vw',
+              maxHeight: '85vh',
               borderRadius: '12px',
               boxShadow: 'var(--shadow-elevated)',
             }}
