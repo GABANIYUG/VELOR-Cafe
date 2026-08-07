@@ -1,12 +1,12 @@
-// Web Audio API Synthesizer & Soundscape Engine for VELOR
+// Rich Web Audio API Synthesizer & Soundscape Engine for VELOR Luxury Café
 
 class AudioEngine {
   constructor() {
     this.ctx = null;
-    this.isAtmospherePlaying = false;
-    this.ambientGain = null;
+    this.isPlaying = false;
+    this.masterGain = null;
+    this.oscillators = [];
     this.noiseNode = null;
-    this.filterNode = null;
   }
 
   init() {
@@ -19,7 +19,7 @@ class AudioEngine {
     }
   }
 
-  // Tactile Soft UI Click Sound (400Hz soft sine tap)
+  // Tactile Soft UI Click Sound (Warm Wooden Tap)
   playClick() {
     try {
       this.init();
@@ -27,23 +27,21 @@ class AudioEngine {
       const gain = this.ctx.createGain();
       
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(420, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.05);
+      osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.06);
 
-      gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.06);
 
       osc.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.05);
-    } catch (e) {
-      // Quiet fail if browser restricts audio
-    }
+      osc.stop(this.ctx.currentTime + 0.06);
+    } catch (e) {}
   }
 
-  // Soft Hover Sound (Soft Sine Pip)
+  // Soft Hover Sound (Warm Soft Pip)
   playHover() {
     try {
       this.init();
@@ -51,23 +49,23 @@ class AudioEngine {
       const gain = this.ctx.createGain();
       
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(580, this.ctx.currentTime);
+      osc.frequency.setValueAtTime(440, this.ctx.currentTime);
 
-      gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.03);
+      gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
 
       osc.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.03);
+      osc.stop(this.ctx.currentTime + 0.04);
     } catch (e) {}
   }
 
-  // Toggle Ambient Sanctuary Soundscape (Vinyl Crackle & Low Warmth Pad)
+  // Toggle Ambient Sanctuary Soundscape
   toggleAtmosphere(onStateChange) {
     this.init();
-    if (this.isAtmospherePlaying) {
+    if (this.isPlaying) {
       this.stopAtmosphere();
       if (onStateChange) onStateChange(false);
     } else {
@@ -77,59 +75,84 @@ class AudioEngine {
   }
 
   startAtmosphere() {
-    if (this.isAtmospherePlaying) return;
+    if (this.isPlaying) return;
 
-    // Buffer size 2 seconds of pink noise for vinyl crackle
+    this.masterGain = this.ctx.createGain();
+    this.masterGain.gain.setValueAtTime(0.01, this.ctx.currentTime);
+    this.masterGain.gain.linearRampToValueAtTime(0.28, this.ctx.currentTime + 1.5);
+    this.masterGain.connect(this.ctx.destination);
+
+    // Warm Low-Pass Ambient Chord Pad (Fmaj7 Warm Sanctuary Chords: F2, C3, A3, E4)
+    const chordFrequencies = [87.31, 130.81, 220.00, 329.63];
+    this.oscillators = chordFrequencies.map((freq) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      const filter = this.ctx.createBiquadFilter();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+      // Low-pass filter for warm acoustic softness
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(280, this.ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start();
+      return osc;
+    });
+
+    // Vinyl Crackle Noise Layer
     const bufferSize = this.ctx.sampleRate * 2;
     const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
-    
-    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+
     for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      b0 = 0.99886 * b0 + white * 0.0555179;
-      b1 = 0.99332 * b1 + white * 0.0750759;
-      b2 = 0.96900 * b2 + white * 0.1538520;
-      b3 = 0.86650 * b3 + white * 0.3104856;
-      b4 = 0.55000 * b4 + white * 0.5329522;
-      b5 = -0.7616 * b5 - white * 0.0168980;
-      output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-      output[i] *= 0.04;
-      b6 = white * 0.115926;
+      output[i] = (Math.random() * 2 - 1) * 0.08;
     }
 
     this.noiseNode = this.ctx.createBufferSource();
     this.noiseNode.buffer = noiseBuffer;
     this.noiseNode.loop = true;
 
-    // Low-pass filter for warm cafe acoustics
-    this.filterNode = this.ctx.createBiquadFilter();
-    this.filterNode.type = 'lowpass';
-    this.filterNode.frequency.setValueAtTime(450, this.ctx.currentTime);
+    const noiseFilter = this.ctx.createBiquadFilter();
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.setValueAtTime(800, this.ctx.currentTime);
+    noiseFilter.Q.setValueAtTime(1.5, this.ctx.currentTime);
 
-    this.ambientGain = this.ctx.createGain();
-    this.ambientGain.gain.setValueAtTime(0.01, this.ctx.currentTime);
-    this.ambientGain.gain.linearRampToValueAtTime(0.08, this.ctx.currentTime + 2.0);
+    const noiseGain = this.ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.12, this.ctx.currentTime);
 
-    this.noiseNode.connect(this.filterNode);
-    this.filterNode.connect(this.ambientGain);
-    this.ambientGain.connect(this.ctx.destination);
+    this.noiseNode.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(this.masterGain);
 
     this.noiseNode.start();
-    this.isAtmospherePlaying = true;
+    this.isPlaying = true;
   }
 
   stopAtmosphere() {
-    if (!this.isAtmospherePlaying) return;
-    if (this.ambientGain) {
-      this.ambientGain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 1.0);
+    if (!this.isPlaying) return;
+
+    if (this.masterGain) {
+      this.masterGain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.8);
       setTimeout(() => {
-        if (this.noiseNode) {
-          this.noiseNode.stop();
-          this.noiseNode.disconnect();
+        if (this.oscillators) {
+          this.oscillators.forEach((osc) => {
+            try { osc.stop(); osc.disconnect(); } catch (e) {}
+          });
+          this.oscillators = [];
         }
-        this.isAtmospherePlaying = false;
-      }, 1000);
+        if (this.noiseNode) {
+          try { this.noiseNode.stop(); this.noiseNode.disconnect(); } catch (e) {}
+          this.noiseNode = null;
+        }
+        this.isPlaying = false;
+      }, 800);
     }
   }
 }
