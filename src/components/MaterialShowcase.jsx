@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Layers, Sparkles, Compass, Shield } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 
 const MATERIALS = [
@@ -48,42 +47,47 @@ export default function MaterialShowcase() {
     <section
       id="story"
       style={{
-        padding: '160px 0 120px 0',
+        padding: '120px 0 80px 0',
         position: 'relative',
         background: 'linear-gradient(180deg, var(--color-obsidian) 0%, var(--color-espresso) 100%)',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
         
         {/* Section Header */}
-        <div style={{ marginBottom: '80px', textAlign: 'center' }}>
-          <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
+        <div style={{ marginBottom: '60px', textAlign: 'center' }}>
+          <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
             PART I — BRAND PHILOSOPHY & MATERIALITY
           </span>
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
             Architecture of Calm & Material Restraint
           </h2>
-          <p className="text-lead" style={{ maxWidth: '640px', margin: '20px auto 0 auto' }}>
+          <p className="text-lead" style={{ maxWidth: '640px', margin: '16px auto 0 auto' }}>
             "The café should feel closer to an Aman resort lobby than a traditional coffee shop. Every material is honest, tactile, and naturally beautiful."
           </p>
         </div>
 
-        {/* Asymmetrical Grid Showcase */}
+        {/* Asymmetrical Grid Showcase with Mobile Safety */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
+            display: 'flex',
+            flexDirection: 'column',
             gap: '40px',
-            alignItems: 'center',
           }}
         >
-          {/* Left Column: Interactive Material Selector */}
-          <div style={{ gridColumn: 'span 5' }}>
-            <h3 className="heading-3 font-serif" style={{ marginBottom: '24px', color: 'var(--color-travertine)' }}>
+          {/* Top/Left: Interactive Material Selector */}
+          <div>
+            <h3 className="heading-3 font-serif" style={{ marginBottom: '20px', color: 'var(--color-travertine)' }}>
               Tactile Material Library
             </h3>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '16px',
+              }}
+            >
               {MATERIALS.map((mat) => {
                 const isActive = activeMaterial.id === mat.id;
                 return (
@@ -96,7 +100,7 @@ export default function MaterialShowcase() {
                     onMouseEnter={() => audioEngine.playHover()}
                     className={isActive ? 'glass-panel-brass' : 'glass-panel'}
                     style={{
-                      padding: '20px 24px',
+                      padding: '16px 20px',
                       cursor: 'pointer',
                       transition: 'all 0.3s var(--ease-out-expo)',
                       borderLeft: isActive ? '4px solid var(--color-brass)' : '1px solid var(--glass-border-light)',
@@ -104,13 +108,13 @@ export default function MaterialShowcase() {
                     data-cursor="hover"
                     data-cursor-text="INSPECT"
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 500, color: 'var(--color-travertine)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', flexWrap: 'wrap', gap: '4px' }}>
+                      <h4 style={{ fontSize: '1rem', fontWeight: 500, color: 'var(--color-travertine)' }}>
                         {mat.name}
                       </h4>
-                      <span className="text-label" style={{ fontSize: '0.65rem' }}>{mat.badge}</span>
+                      <span className="text-label" style={{ fontSize: '0.6rem' }}>{mat.badge}</span>
                     </div>
-                    <p style={{ fontSize: '0.875rem', color: 'rgba(249, 246, 240, 0.65)', lineHeight: 1.5 }}>
+                    <p style={{ fontSize: '0.813rem', color: 'rgba(249, 246, 240, 0.65)', lineHeight: 1.4 }}>
                       {mat.origin} • Roughness {mat.roughness}
                     </p>
                   </div>
@@ -119,10 +123,10 @@ export default function MaterialShowcase() {
             </div>
           </div>
 
-          {/* Right Column: Active Material Display & High-Res Render */}
-          <div style={{ gridColumn: 'span 7' }} id="materials">
-            <div className="glass-panel-brass" style={{ padding: '32px', overflow: 'hidden' }}>
-              <div style={{ position: 'relative', width: '100%', height: '420px', borderRadius: '8px', overflow: 'hidden', marginBottom: '24px' }}>
+          {/* Bottom/Right: Active Material Display & High-Res Render */}
+          <div id="materials">
+            <div className="glass-panel-brass" style={{ padding: '24px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', width: '100%', height: '320px', borderRadius: '8px', overflow: 'hidden', marginBottom: '20px' }}>
                 <img
                   src={activeMaterial.image}
                   alt={activeMaterial.name}
@@ -136,23 +140,23 @@ export default function MaterialShowcase() {
                 <div
                   style={{
                     position: 'absolute',
-                    top: '20px',
-                    left: '20px',
-                    background: 'rgba(18, 17, 16, 0.75)',
+                    top: '16px',
+                    left: '16px',
+                    background: 'rgba(18, 17, 16, 0.85)',
                     backdropFilter: 'blur(12px)',
-                    padding: '8px 16px',
+                    padding: '6px 12px',
                     borderRadius: '20px',
                     border: '1px solid var(--glass-border-brass)',
                   }}
                 >
-                  <span className="text-label" style={{ fontSize: '0.7rem' }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem' }}>
                     PHYSICALLY BASED SHADER MAP
                   </span>
                 </div>
               </div>
 
               <div>
-                <h3 className="heading-2 font-serif" style={{ marginBottom: '12px', color: 'var(--color-travertine)' }}>
+                <h3 className="heading-2 font-serif" style={{ marginBottom: '8px', color: 'var(--color-travertine)' }}>
                   {activeMaterial.name}
                 </h3>
                 <p className="text-body" style={{ marginBottom: '20px' }}>
@@ -162,23 +166,23 @@ export default function MaterialShowcase() {
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
                     gap: '16px',
-                    paddingTop: '20px',
+                    paddingTop: '16px',
                     borderTop: '1px solid rgba(249, 246, 240, 0.1)',
                   }}
                 >
                   <div>
-                    <span className="text-label" style={{ display: 'block', fontSize: '0.65rem' }}>LOCATION</span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--color-travertine)' }}>{activeMaterial.origin}</span>
+                    <span className="text-label" style={{ display: 'block', fontSize: '0.6rem' }}>LOCATION</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--color-travertine)' }}>{activeMaterial.origin}</span>
                   </div>
                   <div>
-                    <span className="text-label" style={{ display: 'block', fontSize: '0.65rem' }}>SURFACE SHADER</span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--color-brass)' }}>{activeMaterial.roughness}</span>
+                    <span className="text-label" style={{ display: 'block', fontSize: '0.6rem' }}>SURFACE SHADER</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--color-brass)' }}>{activeMaterial.roughness}</span>
                   </div>
                   <div>
-                    <span className="text-label" style={{ display: 'block', fontSize: '0.65rem' }}>AUTHENTICITY</span>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--color-travertine)' }}>100% Organic Raw</span>
+                    <span className="text-label" style={{ display: 'block', fontSize: '0.6rem' }}>AUTHENTICITY</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--color-travertine)' }}>100% Organic Raw</span>
                   </div>
                 </div>
               </div>

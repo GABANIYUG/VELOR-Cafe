@@ -8,7 +8,7 @@ export default function Navbar({ onOpenReservation }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -22,10 +22,10 @@ export default function Navbar({ onOpenReservation }) {
     <header
       style={{
         position: 'fixed',
-        top: scrolled ? '16px' : '28px',
+        top: scrolled ? '12px' : '20px',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: 'calc(100% - 40px)',
+        width: 'calc(100% - 24px)',
         maxWidth: '1280px',
         zIndex: 900,
         transition: 'all 0.4s var(--ease-out-expo)',
@@ -37,7 +37,7 @@ export default function Navbar({ onOpenReservation }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '14px 28px',
+          padding: '10px 18px',
           borderRadius: '40px',
         }}
       >
@@ -47,14 +47,15 @@ export default function Navbar({ onOpenReservation }) {
           onClick={() => audioEngine.playClick()}
           className="font-serif"
           style={{
-            fontSize: '1.65rem',
+            fontSize: '1.35rem',
             fontWeight: 400,
-            letterSpacing: '0.18em',
+            letterSpacing: '0.15em',
             color: 'var(--color-travertine)',
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '6px',
+            whiteSpace: 'nowrap',
           }}
           data-cursor="hover"
           data-cursor-text="VELOR"
@@ -62,20 +63,20 @@ export default function Navbar({ onOpenReservation }) {
           VELOR
           <span
             style={{
-              width: '6px',
-              height: '6px',
+              width: '5px',
+              height: '5px',
               borderRadius: '50%',
               backgroundColor: 'var(--color-brass)',
             }}
           />
         </a>
 
-        {/* Navigation Links */}
+        {/* Navigation Links (Desktop) */}
         <nav
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '32px',
+            gap: '28px',
           }}
           className="desktop-only"
         >
@@ -93,9 +94,9 @@ export default function Navbar({ onOpenReservation }) {
               onClick={() => audioEngine.playClick()}
               onMouseEnter={() => audioEngine.playHover()}
               style={{
-                fontSize: '0.813rem',
+                fontSize: '0.78rem',
                 fontWeight: 500,
-                letterSpacing: '0.14em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 color: 'rgba(249, 246, 240, 0.8)',
                 textDecoration: 'none',
@@ -110,16 +111,16 @@ export default function Navbar({ onOpenReservation }) {
         </nav>
 
         {/* Actions: Sound Toggle & Reservation */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {/* Sound Toggle */}
           <button
             onClick={toggleSound}
             onMouseEnter={() => audioEngine.playHover()}
             className="btn-secondary"
             style={{
-              padding: '10px 18px',
-              fontSize: '0.75rem',
-              gap: '8px',
+              padding: '8px 12px',
+              fontSize: '0.7rem',
+              gap: '6px',
             }}
             data-cursor="hover"
             data-cursor-text={audioActive ? 'MUTE' : 'SOUND'}
@@ -146,14 +147,14 @@ export default function Navbar({ onOpenReservation }) {
             onMouseEnter={() => audioEngine.playHover()}
             className="btn-primary"
             style={{
-              padding: '10px 22px',
-              fontSize: '0.75rem',
+              padding: '8px 16px',
+              fontSize: '0.7rem',
             }}
             data-cursor="hover"
             data-cursor-text="BOOK"
           >
             <Calendar size={14} />
-            <span>RESERVE TABLE</span>
+            <span>RESERVE</span>
           </button>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Droplet, Flame, Thermometer, Gauge } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 
 const BEANS = [
@@ -45,22 +44,22 @@ export default function CoffeeCraft() {
     <section
       id="craft"
       style={{
-        padding: '140px 0',
+        padding: '100px 0',
         position: 'relative',
         backgroundColor: 'var(--color-obsidian)',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
         
         {/* Section Title */}
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
             PART II — THE BEAN-TO-CUP RITUAL
           </span>
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
             Uncompromising Coffee Craftsmanship
           </h2>
-          <p className="text-lead" style={{ maxWidth: '680px', margin: '20px auto 0 auto' }}>
+          <p className="text-lead" style={{ maxWidth: '680px', margin: '16px auto 0 auto' }}>
             "Celebrating India's finest high-altitude Araku Valley and Monsooned Malabar micro-lots alongside global award-winning Geisha harvests."
           </p>
         </div>
@@ -70,8 +69,8 @@ export default function CoffeeCraft() {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '16px',
-            marginBottom: '60px',
+            gap: '10px',
+            marginBottom: '40px',
             flexWrap: 'wrap',
           }}
         >
@@ -87,8 +86,9 @@ export default function CoffeeCraft() {
                 onMouseEnter={() => audioEngine.playHover()}
                 className={isActive ? 'btn-primary' : 'btn-secondary'}
                 style={{
-                  padding: '14px 28px',
+                  padding: '10px 20px',
                   borderRadius: '30px',
+                  fontSize: '0.75rem',
                 }}
                 data-cursor="hover"
                 data-cursor-text="SELECT"
@@ -100,45 +100,66 @@ export default function CoffeeCraft() {
         </div>
 
         {/* Bean Display Card */}
-        <div className="glass-panel-brass" style={{ padding: '48px', borderRadius: '16px' }}>
+        <div className="glass-panel-brass" style={{ padding: '24px', borderRadius: '16px' }}>
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(12, 1fr)',
-              gap: '48px',
-              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '32px',
             }}
           >
-            {/* Left: Bean Details & Extraction Metrics */}
-            <div style={{ gridColumn: 'span 7' }}>
-              <div className="text-label" style={{ marginBottom: '12px', color: 'var(--color-brass)' }}>
+            {/* Bean Photo */}
+            <div
+              style={{
+                width: '100%',
+                height: '280px',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                position: 'relative',
+                border: '1px solid var(--glass-border-brass)',
+              }}
+            >
+              <img
+                src={selectedBean.image}
+                alt={selectedBean.name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+
+            {/* Bean Details & Extraction Metrics */}
+            <div>
+              <div className="text-label" style={{ marginBottom: '8px', color: 'var(--color-brass)' }}>
                 {selectedBean.origin} • {selectedBean.altitude}
               </div>
 
-              <h3 className="heading-1 font-serif" style={{ marginBottom: '16px', color: 'var(--color-travertine)' }}>
+              <h3 className="heading-2 font-serif" style={{ marginBottom: '12px', color: 'var(--color-travertine)' }}>
                 {selectedBean.name}
               </h3>
 
-              <p className="text-body" style={{ marginBottom: '32px', fontSize: '1.1rem' }}>
+              <p className="text-body" style={{ marginBottom: '24px', fontSize: '0.95rem' }}>
                 Processed via <strong>{selectedBean.process}</strong>. Roasted in small batches to highlight fragrant floral aromas, rich body, and smooth velvet mouthfeel.
               </p>
 
               {/* Tasting Notes Bullets */}
-              <div style={{ marginBottom: '40px' }}>
-                <span className="text-label" style={{ display: 'block', marginBottom: '14px' }}>
+              <div style={{ marginBottom: '28px' }}>
+                <span className="text-label" style={{ display: 'block', marginBottom: '10px' }}>
                   KEY TASTING NOTES
                 </span>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   {selectedBean.notes.map((note) => (
                     <span
                       key={note}
                       style={{
-                        padding: '8px 18px',
+                        padding: '6px 14px',
                         borderRadius: '20px',
                         background: 'rgba(197, 160, 89, 0.12)',
                         border: '1px solid rgba(197, 160, 89, 0.3)',
                         color: 'var(--color-travertine)',
-                        fontSize: '0.875rem',
+                        fontSize: '0.78rem',
                         fontWeight: 500,
                       }}
                     >
@@ -152,54 +173,30 @@ export default function CoffeeCraft() {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(4, 1fr)',
-                  gap: '16px',
-                  padding: '24px',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
+                  gap: '12px',
+                  padding: '16px',
                   borderRadius: '12px',
-                  background: 'rgba(18, 17, 16, 0.6)',
+                  background: 'rgba(18, 17, 16, 0.7)',
                   border: '1px solid var(--glass-border-light)',
                 }}
               >
                 <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>DOSE</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.dose}</span>
+                  <span className="text-label" style={{ fontSize: '0.6rem', display: 'block', marginBottom: '2px' }}>DOSE</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.dose}</span>
                 </div>
                 <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>YIELD</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.yield}</span>
+                  <span className="text-label" style={{ fontSize: '0.6rem', display: 'block', marginBottom: '2px' }}>YIELD</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.yield}</span>
                 </div>
                 <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>TIME</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-brass)' }}>{selectedBean.specs.time}</span>
+                  <span className="text-label" style={{ fontSize: '0.6rem', display: 'block', marginBottom: '2px' }}>TIME</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-brass)' }}>{selectedBean.specs.time}</span>
                 </div>
                 <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>WATER TEMP</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.temp}</span>
+                  <span className="text-label" style={{ fontSize: '0.6rem', display: 'block', marginBottom: '2px' }}>TEMP</span>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.temp}</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Right: High-Res Coffee Photography */}
-            <div style={{ gridColumn: 'span 5' }}>
-              <div
-                style={{
-                  width: '100%',
-                  height: '460px',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  border: '1px solid var(--glass-border-brass)',
-                }}
-              >
-                <img
-                  src={selectedBean.image}
-                  alt={selectedBean.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                  }}
-                />
               </div>
             </div>
           </div>

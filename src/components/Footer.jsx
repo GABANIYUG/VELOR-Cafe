@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Clock, Mail, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, ArrowRight } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 
 export default function Footer({ onOpenReservation }) {
@@ -18,43 +18,43 @@ export default function Footer({ onOpenReservation }) {
       style={{
         backgroundColor: 'var(--color-obsidian)',
         borderTop: '1px solid rgba(249, 246, 240, 0.08)',
-        paddingTop: '120px',
-        paddingBottom: '40px',
+        paddingTop: '80px',
+        paddingBottom: '32px',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px', position: 'relative', zIndex: 2 }}>
         
-        {/* Flagship Location & Hours Grid */}
+        {/* Flagship Location & Hours Container */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '48px',
-            marginBottom: '100px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '40px',
+            marginBottom: '60px',
           }}
         >
-          {/* Col 1: Flagship Details */}
-          <div style={{ gridColumn: 'span 5' }}>
-            <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
+          {/* Flagship Details */}
+          <div>
+            <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
               FLAGSHIP SANCTUARY
             </span>
-            <h3 className="heading-2 font-serif" style={{ color: 'var(--color-travertine)', marginBottom: '24px' }}>
+            <h3 className="heading-2 font-serif" style={{ color: 'var(--color-travertine)', marginBottom: '20px' }}>
               VELOR Flagship No. 01
             </h3>
             
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '20px' }}>
-              <MapPin size={20} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
-              <p className="text-body" style={{ color: 'var(--color-travertine)' }}>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '16px' }}>
+              <MapPin size={18} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
+              <p className="text-body" style={{ color: 'var(--color-travertine)', fontSize: '0.9rem' }}>
                 Waterfield Road, Bandra West, Mumbai <br />
                 <em>Upcoming: Qutub Heritage Precinct, Mehrauli, New Delhi</em>
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '32px' }}>
-              <Clock size={20} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
-              <p className="text-body" style={{ color: 'var(--color-travertine)' }}>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '24px' }}>
+              <Clock size={18} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
+              <p className="text-body" style={{ color: 'var(--color-travertine)', fontSize: '0.9rem' }}>
                 Monday – Sunday: 08:00 AM – 11:00 PM <br />
                 Tasting Flight Hours: 10:00 AM – 05:00 PM
               </p>
@@ -71,21 +71,21 @@ export default function Footer({ onOpenReservation }) {
             </button>
           </div>
 
-          {/* Col 2: Journal & Newsletter */}
-          <div style={{ gridColumn: 'span 7' }}>
-            <div className="glass-panel-brass" style={{ padding: '40px', borderRadius: '16px' }}>
-              <span className="text-label" style={{ marginBottom: '12px', display: 'block' }}>
+          {/* Journal & Newsletter */}
+          <div>
+            <div className="glass-panel-brass" style={{ padding: '24px', borderRadius: '16px' }}>
+              <span className="text-label" style={{ marginBottom: '8px', display: 'block' }}>
                 EDITORIAL JOURNAL & LIMITED LOT RELEASES
               </span>
-              <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)', marginBottom: '16px' }}>
+              <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)', marginBottom: '12px' }}>
                 Join the VELOR Sanctuary Circle
               </h3>
-              <p className="text-body" style={{ marginBottom: '24px' }}>
+              <p className="text-body" style={{ marginBottom: '20px', fontSize: '0.875rem' }}>
                 Receive private invitations to seasonal Araku micro-lot tastings, architectural salons, and limited-edition ceramic releases.
               </p>
 
               {!subscribed ? (
-                <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   <input
                     type="email"
                     placeholder="Enter your email address"
@@ -93,21 +93,22 @@ export default function Footer({ onOpenReservation }) {
                     onChange={(e) => setEmail(e.target.value)}
                     style={{
                       flex: 1,
-                      minWidth: '260px',
-                      padding: '14px 20px',
+                      minWidth: '220px',
+                      padding: '12px 18px',
                       borderRadius: '30px',
                       background: 'rgba(249, 246, 240, 0.06)',
                       border: '1px solid var(--glass-border-light)',
                       color: 'var(--color-travertine)',
+                      fontSize: '0.85rem',
                     }}
                     required
                   />
-                  <button type="submit" className="btn-primary">
-                    SUBSCRIBE <ArrowRight size={16} />
+                  <button type="submit" className="btn-primary" style={{ padding: '12px 20px' }}>
+                    SUBSCRIBE <ArrowRight size={14} />
                   </button>
                 </form>
               ) : (
-                <div style={{ color: 'var(--color-brass)', fontWeight: 500, fontSize: '0.95rem' }}>
+                <div style={{ color: 'var(--color-brass)', fontWeight: 500, fontSize: '0.9rem' }}>
                   ✓ Thank you. You have been added to the VELOR Sanctuary Journal.
                 </div>
               )}
@@ -115,16 +116,17 @@ export default function Footer({ onOpenReservation }) {
           </div>
         </div>
 
-        {/* Massive Watermark Typography */}
-        <div style={{ textAlign: 'center', margin: '40px 0 20px 0', opacity: 0.15, userSelect: 'none' }}>
+        {/* Watermark Typography */}
+        <div style={{ textAlign: 'center', margin: '20px 0 10px 0', opacity: 0.12, userSelect: 'none', overflow: 'hidden' }}>
           <span
             className="font-serif"
             style={{
-              fontSize: 'clamp(6rem, 18vw, 22rem)',
+              fontSize: 'clamp(4rem, 16vw, 18rem)',
               fontWeight: 300,
-              letterSpacing: '0.2em',
+              letterSpacing: '0.15em',
               color: 'var(--color-travertine)',
-              lineHeight: 0.8,
+              lineHeight: 0.85,
+              display: 'block',
             }}
           >
             VELOR
@@ -137,21 +139,20 @@ export default function Footer({ onOpenReservation }) {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            paddingTop: '32px',
+            paddingTop: '24px',
             borderTop: '1px solid rgba(249, 246, 240, 0.08)',
             fontSize: '0.75rem',
             color: 'rgba(249, 246, 240, 0.4)',
             flexWrap: 'wrap',
-            gap: '16px',
+            gap: '12px',
           }}
         >
           <div>
             © 2026 VELOR Modern Luxury Café (India). All rights reserved. ₹50 Lakh Digital Agency Benchmark.
           </div>
-          <div style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ display: 'flex', gap: '16px' }}>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>INSTAGRAM</a>
-            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>ARCHDAILY INDIA</a>
-            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>KINFOLK</a>
+            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>ARCHDAILY</a>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>AWWWARDS</a>
           </div>
         </div>
