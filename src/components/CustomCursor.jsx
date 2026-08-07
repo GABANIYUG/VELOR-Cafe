@@ -53,14 +53,14 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Inner Real Coffee Bean Photo Cursor */}
+      {/* Inner Real Coffee Bean Transparent Image */}
       <div
         style={{
           position: 'fixed',
           top: pos.y,
           left: pos.x,
-          width: isHovered ? '36px' : '26px',
-          height: isHovered ? '36px' : '26px',
+          width: isHovered ? '34px' : '24px',
+          height: isHovered ? '34px' : '24px',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
           zIndex: 10000,
@@ -74,7 +74,8 @@ export default function CustomCursor() {
             width: '100%',
             height: '100%',
             objectFit: 'contain',
-            filter: isHovered ? 'drop-shadow(0 0 10px rgba(197, 160, 89, 0.85))' : 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6))',
+            backgroundColor: 'transparent',
+            filter: isHovered ? 'drop-shadow(0 0 10px rgba(197, 160, 89, 0.85))' : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6))',
             transform: isHovered ? 'rotate(15deg) scale(1.15)' : 'rotate(-10deg) scale(1)',
             transition: 'transform 0.3s var(--ease-out-expo), filter 0.3s',
           }}
