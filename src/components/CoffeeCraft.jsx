@@ -99,7 +99,7 @@ export default function CoffeeCraft() {
         </div>
 
         {/* Bean Display Card */}
-        <div className="glass-panel-brass" style={{ padding: '48px', borderRadius: '16px' }}>
+        <div className="glass-panel-brass" style={{ padding: '36px', borderRadius: '16px', overflow: 'hidden' }}>
           <div className="craft-grid-container">
             {/* Left: Bean Details & Extraction Metrics */}
             <div className="craft-col-left">
@@ -116,21 +116,21 @@ export default function CoffeeCraft() {
               </p>
 
               {/* Tasting Notes Bullets */}
-              <div style={{ marginBottom: '40px' }}>
+              <div style={{ marginBottom: '36px' }}>
                 <span className="text-label" style={{ display: 'block', marginBottom: '14px' }}>
                   KEY TASTING NOTES
                 </span>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   {selectedBean.notes.map((note) => (
                     <span
                       key={note}
                       style={{
-                        padding: '8px 18px',
+                        padding: '8px 16px',
                         borderRadius: '20px',
                         background: 'rgba(197, 160, 89, 0.12)',
                         border: '1px solid rgba(197, 160, 89, 0.3)',
                         color: 'var(--color-travertine)',
-                        fontSize: '0.875rem',
+                        fontSize: '0.85rem',
                         fontWeight: 500,
                       }}
                     >
@@ -140,7 +140,7 @@ export default function CoffeeCraft() {
                 </div>
               </div>
 
-              {/* Extraction Parameters Grid */}
+              {/* Extraction Parameters Grid - 100% Contained Inside Box */}
               <div
                 className="craft-specs-grid"
                 style={{
@@ -148,25 +148,28 @@ export default function CoffeeCraft() {
                   gap: '16px',
                   padding: '24px',
                   borderRadius: '12px',
-                  background: 'rgba(18, 17, 16, 0.6)',
+                  background: 'rgba(18, 17, 16, 0.7)',
                   border: '1px solid var(--glass-border-light)',
+                  boxSizing: 'border-box',
+                  width: '100%',
+                  overflow: 'hidden',
                 }}
               >
-                <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>DOSE</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.dose}</span>
+                <div style={{ minWidth: 0 }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px', whiteSpace: 'nowrap' }}>DOSE</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)', whiteSpace: 'nowrap' }}>{selectedBean.specs.dose}</span>
                 </div>
-                <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>YIELD</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.yield}</span>
+                <div style={{ minWidth: 0 }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px', whiteSpace: 'nowrap' }}>YIELD</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)', whiteSpace: 'nowrap' }}>{selectedBean.specs.yield}</span>
                 </div>
-                <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>TIME</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-brass)' }}>{selectedBean.specs.time}</span>
+                <div style={{ minWidth: 0 }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px', whiteSpace: 'nowrap' }}>TIME</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-brass)', whiteSpace: 'nowrap' }}>{selectedBean.specs.time}</span>
                 </div>
-                <div>
-                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px' }}>WATER TEMP</span>
-                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)' }}>{selectedBean.specs.temp}</span>
+                <div style={{ minWidth: 0 }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', display: 'block', marginBottom: '4px', whiteSpace: 'nowrap' }}>TEMP</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--color-travertine)', whiteSpace: 'nowrap' }}>{selectedBean.specs.temp}</span>
                 </div>
               </div>
             </div>
