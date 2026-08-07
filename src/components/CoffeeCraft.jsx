@@ -4,37 +4,37 @@ import { audioEngine } from './AudioEngine';
 
 const BEANS = [
   {
-    id: 'ethiopia-geisha',
-    name: 'Yirgacheffe Reserve Geisha',
-    origin: 'Gedeo Zone, Ethiopia',
-    altitude: '2,200 meters',
-    process: 'Natural Anaerobic Fermentation',
-    notes: ['Jasmine Blossom', 'Bergamot Peel', 'Wild White Peach', 'Raw Honey'],
-    roastLevel: 'Ultra-Light Roast',
+    id: 'araku-reserve',
+    name: 'Araku Valley High-Altitude Reserve',
+    origin: 'Eastern Ghats, Andhra Pradesh, India',
+    altitude: '1,400 meters',
+    process: 'Natural Organic Micro-Lot',
+    notes: ['Wild Jasmine', 'Kashmiri Honey', 'Malt Chocolate', 'Ripe Plum'],
+    roastLevel: 'Light Precision Roast',
     specs: { dose: '18.5g', yield: '42.0g', time: '28s', temp: '93.5°C' },
-    image: '/images/velor_pourover_ritual.png',
+    image: '/images/velor_menu_araku_pourover.png',
   },
   {
-    id: 'panama-esmeralda',
+    id: 'monsooned-malabar',
+    name: 'Monsooned Malabar AA Grand Estate',
+    origin: 'Mangalore Coast, Karnataka, India',
+    altitude: '1,100 meters',
+    process: 'Monsoon Wind Matured (3 Months)',
+    notes: ['Earthy Spice', 'Dark Cocoa', 'Walnut', 'Zero Acidity Crema'],
+    roastLevel: 'Medium Roast',
+    specs: { dose: '19.5g', yield: '40.0g', time: '30s', temp: '94.0°C' },
+    image: '/images/velor_menu_malabar_espresso.png',
+  },
+  {
+    id: 'panama-geisha',
     name: 'Panama Hacienda La Esmeralda',
     origin: 'Boquete, Panama',
     altitude: '1,950 meters',
     process: 'Washed Extended Bloom',
-    notes: ['Meyer Lemon', 'Black Tea', 'Elderflower', 'Crisp Nectarine'],
-    roastLevel: 'Light Precision Roast',
-    specs: { dose: '19.0g', yield: '44.0g', time: '30s', temp: '94.0°C' },
-    image: '/images/velor_espresso_macro.png',
-  },
-  {
-    id: 'colombia-bourbon',
-    name: 'Colombia Pink Bourbon Single-Lot',
-    origin: 'Huila, Colombia',
-    altitude: '1,850 meters',
-    process: 'Honey Carbonic Maceration',
-    notes: ['Ripe Papaya', 'Pink Grapefruit', 'Brown Sugar', 'Vanilla Pod'],
-    roastLevel: 'Medium Light Roast',
-    specs: { dose: '18.0g', yield: '38.0g', time: '26s', temp: '92.8°C' },
-    image: '/images/velor_coldbrew_crystal.png',
+    notes: ['Bergamot Peel', 'Elderflower', 'Black Tea', 'Crisp Nectarine'],
+    roastLevel: 'Ultra-Light Roast',
+    specs: { dose: '18.0g', yield: '44.0g', time: '27s', temp: '93.0°C' },
+    image: '/images/velor_pourover_ritual.png',
   },
 ];
 
@@ -60,8 +60,8 @@ export default function CoffeeCraft() {
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
             Uncompromising Coffee Craftsmanship
           </h2>
-          <p className="text-lead" style={{ maxWidth: '640px', margin: '20px auto 0 auto' }}>
-            "We source only top 0.1% micro-lot harvests. Each bean profile is extracted using precise mathematical brew ratios and mineralized spring water."
+          <p className="text-lead" style={{ maxWidth: '680px', margin: '20px auto 0 auto' }}>
+            "Celebrating India's finest high-altitude Araku Valley and Monsooned Malabar micro-lots alongside global award-winning Geisha harvests."
           </p>
         </div>
 
@@ -120,7 +120,7 @@ export default function CoffeeCraft() {
               </h3>
 
               <p className="text-body" style={{ marginBottom: '32px', fontSize: '1.1rem' }}>
-                Processed via <strong>{selectedBean.process}</strong>. Roasted in micro-batches to preserve fragrant floral terpenes and elegant fruit acidity.
+                Processed via <strong>{selectedBean.process}</strong>. Roasted in small batches to highlight fragrant floral aromas, rich body, and smooth velvet mouthfeel.
               </p>
 
               {/* Tasting Notes Bullets */}

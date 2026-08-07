@@ -1,72 +1,89 @@
 import React, { useState } from 'react';
-import { Coffee, Sparkles, Info } from 'lucide-react';
+import { Sparkles, Compass } from 'lucide-react';
 import { audioEngine } from './AudioEngine';
 
-const MENU_CATEGORIES = ['ALL', 'ESPRESSO RITUALS', 'POUR-OVER RESERVE', 'COLD ARCHITECTURE', 'ARTISANAL PASTRIES'];
+const MENU_CATEGORIES = ['ALL', 'ROYAL INDIAN RESERVES', 'ESPRESSO RITUALS', 'POUR-OVER RESERVE', 'COLD ARCHITECTURE', 'ARTISANAL PASTRIES'];
 
 const MENU_ITEMS = [
   {
     id: 'm1',
-    category: 'ESPRESSO RITUALS',
-    name: 'Velor Signature Velvet Latte',
+    category: 'ROYAL INDIAN RESERVES',
+    name: 'Kashmiri Saffron & Cardamom Velvet Latte',
     price: '₹550',
-    description: 'Double shot Geisha espresso folded into silk micro-textured milk infused with Madagascar vanilla pod.',
-    notes: 'Silky, Vanilla, Floral',
+    description: 'Double shot Araku Geisha espresso folded into silk micro-textured milk infused with organic Kashmiri saffron threads and green cardamom.',
+    notes: 'Saffron, Cardamom, Velvet',
     popular: true,
+    image: '/images/velor_menu_saffron_latte.png',
   },
   {
     id: 'm2',
-    category: 'ESPRESSO RITUALS',
-    name: 'Single-Origin Portafilter Extraction',
-    price: '₹450',
-    description: 'Pure 1:2.2 ratio extraction of Ethiopia Yirgacheffe served with side of mineral sparkling water.',
-    notes: 'Jasmine, Bergamot, Bright',
-    popular: false,
+    category: 'ROYAL INDIAN RESERVES',
+    name: 'Araku Valley Organic Reserve V60',
+    price: '₹480',
+    description: 'High-altitude (1,400m) single-origin micro-lot from Eastern Ghats, hand-poured over crystal V60. Delicate floral & wild honey profile.',
+    notes: 'Jasmine, Wild Honey, Citrus',
+    popular: true,
+    image: '/images/velor_menu_araku_pourover.png',
   },
   {
     id: 'm3',
-    category: 'POUR-OVER RESERVE',
-    name: 'Panama Geisha V60 Flight',
-    price: '₹850',
-    description: 'Hand-poured Geisha served at three distinct temperatures (hot, warm, chilled) to experience evolving flavor notes.',
-    notes: 'Peach, Elderflower, Tea-like',
+    category: 'COLD ARCHITECTURE',
+    name: 'Mysore Sandalwood Smoked Cold Brew',
+    price: '₹650',
+    description: '24-hour cold steeped Chikmagalur Peaberry infused with subtle organic Mysore sandalwood cold-smoke, served over a crystal ice sphere.',
+    notes: 'Smoky Oak, Dark Cocoa, Sandalwood',
     popular: true,
+    image: '/images/velor_menu_sandalwood_coldbrew.png',
   },
   {
     id: 'm4',
-    category: 'POUR-OVER RESERVE',
-    name: 'Kyoto Ice Drip Slow Reserve',
-    price: '₹750',
-    description: '12-hour slow drop cold extraction over crystal clear ice sphere in handmade whiskey glass.',
-    notes: 'Dark Chocolate, Cognac, Oak',
+    category: 'ESPRESSO RITUALS',
+    name: 'Monsooned Malabar AA Extraction',
+    price: '₹420',
+    description: 'Matured under Malabar coast monsoon winds for 3 months. Ultra-dense crema with zero harsh acidity, deep spicy chocolate finish.',
+    notes: 'Spiced Cocoa, Earthy, Rich Crema',
     popular: false,
+    image: '/images/velor_menu_malabar_espresso.png',
   },
   {
     id: 'm5',
-    category: 'COLD ARCHITECTURE',
-    name: 'Golden Cold Brew tonic',
-    price: '₹600',
-    description: '24-hour steeped Colombia Pink Bourbon paired with artisanal quinine tonic and dehydrated orange slice.',
-    notes: 'Effervescent, Citrus, Refreshing',
+    category: 'POUR-OVER RESERVE',
+    name: 'Panama Geisha & Coorg Flight',
+    price: '₹850',
+    description: 'Comparative tasting flight featuring Hacienda La Esmeralda (Panama) alongside Coorg Honey-Processed Robusta Grand Reserve.',
+    notes: 'Bergamot, Nectarine, Dark Spice',
     popular: true,
+    image: '/images/velor_pourover_ritual.png',
   },
   {
     id: 'm6',
-    category: 'ARTISANAL PASTRIES',
-    name: 'Black Truffle & Gruyère Croissant',
-    price: '₹680',
-    description: 'AOP French butter croissant filled with shaved black truffle and aged Swiss Gruyère cheese.',
-    notes: 'Savory, Flaky, Rich',
+    category: 'COLD ARCHITECTURE',
+    name: 'Golden Malabar Cold Brew Tonic',
+    price: '₹580',
+    description: 'Cold-brewed Chikmagalur Peaberry paired with artisanal botanical tonic water, dehydrated orange wheel, and fresh rosemary sprig.',
+    notes: 'Effervescent, Botanical, Citrus',
     popular: false,
+    image: '/images/velor_coldbrew_crystal.png',
   },
   {
     id: 'm7',
     category: 'ARTISANAL PASTRIES',
-    name: 'Pistachio Praline Tartlet',
+    name: 'Royal Rose & Pistachio Tartlet (24k Gold)',
     price: '₹620',
-    description: 'Valrhona white chocolate ganache, Sicilian pistachio praline paste, and gold leaf dust.',
-    notes: 'Sweet, Nutty, Decadent',
+    description: 'Kannauj rose water white chocolate ganache, Sicilian pistachio praline paste, topped with edible 24-karat gold leaf flakes.',
+    notes: 'Rose Floral, Pistachio, 24k Gold',
     popular: true,
+    image: '/images/velor_menu_rose_pistachio_tart.png',
+  },
+  {
+    id: 'm8',
+    category: 'ARTISANAL PASTRIES',
+    name: 'AOP French Butter & Black Truffle Croissant',
+    price: '₹680',
+    description: 'Laminated French AOP butter croissant infused with shaved Perigord black truffle and aged Swiss Gruyère melt.',
+    notes: 'Savory, Flaky, Truffle',
+    popular: false,
+    image: '/images/velor_pastry_artisan.png',
   },
 ];
 
@@ -91,11 +108,14 @@ export default function Menu({ onSelectItem }) {
         {/* Title */}
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <span className="text-label" style={{ marginBottom: '16px', display: 'block' }}>
-            EDITORIAL MENU & TASTING FLIGHTS
+            INDIAN LUXURY CAFÉ MENU & TASTING FLIGHTS
           </span>
           <h2 className="heading-1 font-serif" style={{ color: 'var(--color-travertine)' }}>
-            Curated Menu of Daily Rituals
+            Curated Menu of Indian & Global Rituals
           </h2>
+          <p className="text-lead" style={{ maxWidth: '680px', margin: '16px auto 0 auto' }}>
+            Every signature item is presented with its real extraction photograph, showcasing top 0.1% Araku Valley, Monsooned Malabar, and Chikmagalur micro-lots.
+          </p>
         </div>
 
         {/* Category Filters */}
@@ -132,12 +152,12 @@ export default function Menu({ onSelectItem }) {
           })}
         </div>
 
-        {/* Menu Cards Grid */}
+        {/* Menu Cards Grid with Real Item Photos */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(540px, 1fr))',
-            gap: '24px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(560px, 1fr))',
+            gap: '32px',
           }}
         >
           {filteredItems.map((item) => (
@@ -150,50 +170,80 @@ export default function Menu({ onSelectItem }) {
               onMouseEnter={() => audioEngine.playHover()}
               className="glass-panel"
               style={{
-                padding: '28px 32px',
+                borderRadius: '16px',
+                overflow: 'hidden',
                 cursor: 'pointer',
-                transition: 'all 0.3s var(--ease-out-expo)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
+                transition: 'all 0.4s var(--ease-out-expo)',
+                display: 'grid',
+                gridTemplateColumns: '200px 1fr',
+                border: '1px solid var(--glass-border-light)',
               }}
               data-cursor="hover"
               data-cursor-text="VIEW"
             >
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
-                  <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)' }}>
-                    {item.name}
-                  </h3>
-                  <span style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--color-brass)' }}>
-                    {item.price}
-                  </span>
-                </div>
-
-                <p className="text-body" style={{ fontSize: '0.938rem', marginBottom: '16px' }}>
-                  {item.description}
-                </p>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid rgba(249,246,240,0.08)' }}>
-                <span className="text-label" style={{ fontSize: '0.65rem', color: 'rgba(249,246,240,0.5)' }}>
-                  NOTES: {item.notes}
-                </span>
+              {/* Real Item Photo Thumbnail */}
+              <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.6s var(--ease-out-expo)',
+                  }}
+                />
                 {item.popular && (
                   <span
                     style={{
-                      fontSize: '0.65rem',
+                      position: 'absolute',
+                      top: '12px',
+                      left: '12px',
+                      fontSize: '0.6rem',
                       fontWeight: 600,
-                      letterSpacing: '0.12em',
+                      letterSpacing: '0.1em',
                       padding: '4px 10px',
                       borderRadius: '12px',
-                      background: 'rgba(197, 160, 89, 0.2)',
+                      background: 'rgba(18, 17, 16, 0.85)',
+                      backdropFilter: 'blur(8px)',
                       color: 'var(--color-brass-light)',
+                      border: '1px solid var(--glass-border-brass)',
                     }}
                   >
                     ★ SIGNATURE
                   </span>
                 )}
+              </div>
+
+              {/* Item Text & Metadata */}
+              <div
+                style={{
+                  padding: '24px 28px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                    <h3 className="heading-3 font-serif" style={{ color: 'var(--color-travertine)', fontSize: '1.25rem' }}>
+                      {item.name}
+                    </h3>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--color-brass)', marginLeft: '12px' }}>
+                      {item.price}
+                    </span>
+                  </div>
+
+                  <p className="text-body" style={{ fontSize: '0.875rem', marginBottom: '16px', lineHeight: 1.6 }}>
+                    {item.description}
+                  </p>
+                </div>
+
+                <div style={{ paddingTop: '12px', borderTop: '1px solid rgba(249,246,240,0.08)' }}>
+                  <span className="text-label" style={{ fontSize: '0.65rem', color: 'rgba(249,246,240,0.5)' }}>
+                    NOTES: {item.notes}
+                  </span>
+                </div>
               </div>
             </div>
           ))}

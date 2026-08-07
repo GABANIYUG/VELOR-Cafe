@@ -47,16 +47,16 @@ export default function Footer({ onOpenReservation }) {
             <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '20px' }}>
               <MapPin size={20} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
               <p className="text-body" style={{ color: 'var(--color-travertine)' }}>
-                42 Sanctuary Boulevard, Architectural District <br />
-                New Delhi / Tokyo Flagship Partner
+                Waterfield Road, Bandra West, Mumbai <br />
+                <em>Upcoming: Qutub Heritage Precinct, Mehrauli, New Delhi</em>
               </p>
             </div>
 
             <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', marginBottom: '32px' }}>
               <Clock size={20} style={{ color: 'var(--color-brass)', flexShrink: 0, marginTop: '2px' }} />
               <p className="text-body" style={{ color: 'var(--color-travertine)' }}>
-                Monday – Sunday: 08:00 AM – 10:00 PM <br />
-                Tasting Flight Hours: 10:00 AM – 04:00 PM
+                Monday – Sunday: 08:00 AM – 11:00 PM <br />
+                Tasting Flight Hours: 10:00 AM – 05:00 PM
               </p>
             </div>
 
@@ -81,7 +81,7 @@ export default function Footer({ onOpenReservation }) {
                 Join the VELOR Sanctuary Circle
               </h3>
               <p className="text-body" style={{ marginBottom: '24px' }}>
-                Receive private invitations to seasonal micro-lot tastings, architectural events, and limited-edition ceramic releases.
+                Receive private invitations to seasonal Araku micro-lot tastings, architectural salons, and limited-edition ceramic releases.
               </p>
 
               {!subscribed ? (
@@ -146,11 +146,11 @@ export default function Footer({ onOpenReservation }) {
           }}
         >
           <div>
-            © 2026 VELOR Modern Luxury Café. All rights reserved. ₹50 Lakh Digital Agency Specification.
+            © 2026 VELOR Modern Luxury Café (India). All rights reserved. ₹50 Lakh Digital Agency Benchmark.
           </div>
           <div style={{ display: 'flex', gap: '24px' }}>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>INSTAGRAM</a>
-            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>ARCHDAILY</a>
+            <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>ARCHDAILY INDIA</a>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>KINFOLK</a>
             <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>AWWWARDS</a>
           </div>
