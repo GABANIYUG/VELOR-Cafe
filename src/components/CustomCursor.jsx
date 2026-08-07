@@ -1,46 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-// Custom SVG Coffee Bean Icon component
-function CoffeeBeanIcon({ size = 20, isHovered = false }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        filter: isHovered ? 'drop-shadow(0 0 8px rgba(197, 160, 89, 0.8))' : 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
-        transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s',
-        transform: isHovered ? 'scale(1.3) rotate(12deg)' : 'scale(1) rotate(-15deg)',
-      }}
-    >
-      {/* Coffee Bean Outer Shell */}
-      <path
-        d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3Z"
-        fill="url(#beanGradient)"
-        stroke="#C5A059"
-        strokeWidth="1.2"
-      />
-      {/* Coffee Bean S-Curve Line */}
-      <path
-        d="M12 4C10.5 7 13.5 10 12 12C10.5 14 13.5 17 12 20"
-        stroke="#121110"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      {/* Gradients */}
-      <defs>
-        <linearGradient id="beanGradient" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#DFBF7A" />
-          <stop offset="50%" stopColor="#C5A059" />
-          <stop offset="100%" stopColor="#2C221E" />
-        </linearGradient>
-      </defs>
-    </svg>
-  );
-}
-
 export default function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [trailingPos, setTrailingPos] = useState({ x: -100, y: -100 });
@@ -74,7 +33,7 @@ export default function CustomCursor() {
     };
   }, [isVisible]);
 
-  // Smooth trailing effect
+  // Smooth trailing inertia effect for outer halo
   useEffect(() => {
     let animationFrame;
     const updateTrailing = () => {
@@ -94,28 +53,42 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Inner Custom Coffee Bean Cursor */}
+      {/* Inner Real Coffee Bean Photo Cursor */}
       <div
         style={{
           position: 'fixed',
           top: pos.y,
           left: pos.x,
+          width: isHovered ? '36px' : '26px',
+          height: isHovered ? '36px' : '26px',
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
           zIndex: 10000,
+          transition: 'width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo)',
         }}
       >
-        <CoffeeBeanIcon size={24} isHovered={isHovered} />
+        <img
+          src="/images/real_coffee_bean.png"
+          alt="Real Coffee Bean Cursor"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            filter: isHovered ? 'drop-shadow(0 0 10px rgba(197, 160, 89, 0.85))' : 'drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6))',
+            transform: isHovered ? 'rotate(15deg) scale(1.15)' : 'rotate(-10deg) scale(1)',
+            transition: 'transform 0.3s var(--ease-out-expo), filter 0.3s',
+          }}
+        />
       </div>
 
-      {/* Trailing Outer Glassmorphic Ring */}
+      {/* Trailing Outer Glassmorphic Halo Ring */}
       <div
         style={{
           position: 'fixed',
           top: trailingPos.y,
           left: trailingPos.x,
-          width: isHovered ? '72px' : '40px',
-          height: isHovered ? '72px' : '40px',
+          width: isHovered ? '76px' : '44px',
+          height: isHovered ? '76px' : '44px',
           border: isHovered ? '1px solid var(--color-brass)' : '1px solid rgba(197, 160, 89, 0.35)',
           backgroundColor: isHovered ? 'rgba(197, 160, 89, 0.14)' : 'rgba(18, 17, 16, 0.1)',
           backdropFilter: isHovered ? 'blur(6px)' : 'none',
